@@ -4,6 +4,8 @@
 import React from 'react';
 import DatePicker from 'react-bootstrap-date-picker';
 import {FormGroup, ControlLabel, HelpBlock} from 'react-bootstrap';
+//otro probar https://hacker0x01.github.io/react-datepicker/
+
 
 class FormatDate extends React.Component {
     constructor(props) {
