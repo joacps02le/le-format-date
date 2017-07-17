@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import FormatDate from './FormatDate';
+import FormInitial from './FormInitial';
+
+
 class App extends Component {
 
 
@@ -12,7 +14,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-          <FormatDate/>
+          <FormInitial/>
+
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>

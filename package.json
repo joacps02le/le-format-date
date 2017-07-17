@@ -5,9 +5,11 @@
   "dependencies": {
     "fecha": "^2.3.1",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react-bootstrap": "^0.30.10",
     "react-bootstrap-date-picker": "^5.0.1",
-    "react-bootstrap": "^0.30.10"
+    "react-bootstrap-table": "^3.4.6",
+    "react-datepicker": "^0.52.0",
+    "react-dom": "^15.6.1"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"
