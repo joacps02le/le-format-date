@@ -1,6 +1,7 @@
 import React from 'react';
-import DatePickerDrown from 'react-datepicker';
-import moment from 'moment';
+import DatePickerDropdown from 'react-datepicker';
+import * as moment from 'moment';
+// import 'moment/locale/es';
 import 'react-datepicker/dist/react-datepicker.css';
 const language = typeof window !== 'undefined' && window.navigator ? (window.navigator.userLanguage || window.navigator.language || '').toLowerCase() : '';
 const dateFormat = !language || language === 'en-us' ? 'MM/DD/YYYY' : 'DD/MM/YYYY';
@@ -12,7 +13,7 @@ class FormatDateDrownList extends React.Component {
 
     constructor(props) {
         super(props);
-
+        require('moment/locale/'+language);
         this.state = {
             startDate: moment(),
             separator: dateFormat.match(/[^A-Z]/)[0]
@@ -141,7 +142,7 @@ class FormatDateDrownList extends React.Component {
 
         return (
             <div>
-                <DatePickerDrown
+                <DatePickerDropdown
                     selected={this.state.startDate}
                     peekNextMonth
                     showMonthDropdown
