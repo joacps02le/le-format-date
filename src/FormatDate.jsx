@@ -15,7 +15,6 @@ class FormatDate extends React.Component {
 
     getInitialState() {
         var value = new Date().toISOString();
-        console.log(value);
         return {
             value: value
         }

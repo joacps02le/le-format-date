@@ -31,27 +31,21 @@ class FormInitial extends React.Component {
         return (
             <div>
                 <FormGroup className="text-left">
-                    <BootstrapTable
-                        data={products}
-                        selectRow={selectRowProp}
-                        striped
-                        hover
-                        condensed
-                        insertRow
-                        deleteRow
-                        search
-                    >
+                    <FormatDateDrownList/>
+                    <BootstrapTable data={products} selectRow={selectRowProp} striped hover condensed
+                                    insertRow deleteRow search>
                         <TableHeaderColumn dataField="id" isKey dataAlign="right" dataSort>Product
-                            ID</TableHeaderColumn>
-                        <TableHeaderColumn dataField="name" dataSort>Product Name</TableHeaderColumn>
+                            ID </TableHeaderColumn>
+                        <TableHeaderColumn dataField="name" dataSort>Product Name </TableHeaderColumn>
                         <TableHeaderColumn dataField="price" dataAlign="center">Product
-                            Price</TableHeaderColumn>
+                            Price </TableHeaderColumn>
                     </BootstrapTable>
                     <ControlLabel>FormatDateDrownList</ControlLabel>
                     <FormatDateDrownList/>
                     <br/><br/>
                     <ControlLabel>FormatDate</ControlLabel>
                     <FormatDate/>
+                    <FormatDateDrownList/>
                 </FormGroup>
             </div>
         );
