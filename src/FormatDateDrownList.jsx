@@ -29,37 +29,52 @@ class FormatDateDrownList extends React.Component {
     }
 
     handleChange(date) {
+        console.log("1=", this.state.startDate);
         debugger
-        // if (date._d !== 'Invalid Date')
-        if (this.state.startDate >= minDate && this.state.startDate <= maxDate)
-        {
-            if (this.state.startDate !== 'undefined' && this.state.startDate !== null && this.state.startDate.length === 10) {
-                this.setState({
-                    startDate: date
-                });
-            } else {
-                if (typeof date._i === 'undefined' || this.state.startDate === '' || date._i !== this.state.startDate) {
+        if (date._d !== 'Invalid Date' && this.state.startDate !== 'Invalid Date') {
+            if (this.state.startDate !== null) {
+                if ( this.state.startDate === '') {
                     this.setState({
-                        startDate: date
+                        startDate: date,
                     });
+                } else {
+                    if (this.state.startDate._d >= minDate._d && this.state.startDate._d <= maxDate._d) {
+                        if (this.state.startDate !== 'undefined' && this.state.startDate !== null) {
+                            this.setState({
+                                startDate: date,
+                            });
+                        } else {
+                            if (this.state.startDate.length === 10) {
+                                if (typeof date._i === 'undefined' || this.state.startDate === '' || date._i !== this.state.startDate) {
+                                    this.setState({
+                                        startDate: date,
+                                    });
+                                }
+                            }
+                        }
+                    } else {
+                        this.setState({
+                            startDate: moment(),
+                        });
+                    }
                 }
+            } else {
+                this.setState({
+                    startDate: date,
+                });
             }
-        }else{
+        }
+        else {
             this.setState({
                 startDate: moment(),
             });
         }
 
-
-        // else{
-        //     this.setState({
-        //         startDate: moment(),
-        //     });
-        // }
-
     }
 
     handleInputChange(e) {
+        console.log("2=", this.state.startDate);
+        // debugger
         const originalValue = e.target.value.concat(e.key);
         const inputValue = originalValue.replace(/(-|\/\/)/g, this.state.separator).slice(0, 10);
         let month, day, year;
@@ -110,6 +125,7 @@ class FormatDateDrownList extends React.Component {
     }
 
     handleBadInput(originalValue) {
+        console.log("3=", this.state.startDate);
         const parts = originalValue.replace(new RegExp(`[^0-9${this.state.separator}]`), '').split(this.state.separator);
         if (dateFormat.match(/MM.DD.YYYY/) || dateFormat.match(/DD.MM.YYYY/)) {
             if (parts[0] && parts[0].length > 2) {
@@ -142,7 +158,7 @@ class FormatDateDrownList extends React.Component {
     }
 
     handleKeyDown(e) {
-        debugger
+        // debugger
         if (e.key.match(/[0-9]/)) {
             this.handleInputChange(e);
         } else {
@@ -158,18 +174,38 @@ class FormatDateDrownList extends React.Component {
 
     render() {
         let valueDate = '';
+        console.log("4=", this.state.startDate);
+        // debugger
         if (typeof  this.state.startDate !== 'undefined' && this.state.startDate !== null && this.state.startDate._d !== 'Invalid Date') {
-            if (this.state.startDate !== '') {
+            // debugger
+            if (this.state.startDate !== '' && this.state.startDate.length === 10) {
+                // debugger
+                console.log("41=", this.state.startDate);
                 valueDate = moment(this.state.startDate, dateFormat);
+            } else {
+                // debugger
+                if (this.state.startDate !== '' && this.state.startDate._d !== null) {// &&  this.state.startDate._isUTC !== false){
+                    valueDate = this.state.startDate;
+                }
             }
         }
-        if (this.state.startDate <= minDate && this.state.startDate >= maxDate) {
-            this.setState({
-                startDate: moment(),
-            });
+        // debugger
+
+        if(typeof valueDate._d !== 'undefined') {
+            debugger
+            let valueMin = valueDate.diff(minDate, 'seconds');
+            let valueMax = valueDate.diff(maxDate, 'seconds');
+            if (valueMin <=0 || valueMax >= 0 ||  isNaN(valueMin) || isNaN(valueMax)) {
+                // debugger
+                valueDate = '';
+                this.setState({
+                    startDate: valueDate,
+                });
+            }
         }
-
-
+        //
+        console.log("42=", this.state.startDate);
+        console.log("43=", valueDate);
         return (
             <div>
                 <DatePickerDropdown
