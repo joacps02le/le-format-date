@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "fecha": "^2.3.1",
+    "moment": "^2.18.1",
     "react": "^15.6.1",
     "react-bootstrap": "^0.30.10",
     "react-bootstrap-date-picker": "^5.0.1",

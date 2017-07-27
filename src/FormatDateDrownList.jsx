@@ -1,7 +1,6 @@
 import React from 'react';
 import DatePickerDropdown from 'react-datepicker';
 import * as moment from 'moment';
-// import 'moment/locale/es';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const language = typeof window !== 'undefined' && window.navigator ? (window.navigator.userLanguage || window.navigator.language || '').toLowerCase() : '';
@@ -29,8 +28,6 @@ class FormatDateDrownList extends React.Component {
     }
 
     handleChange(date) {
-        console.log("1=", this.state.startDate);
-        debugger
         if (date._d !== 'Invalid Date' && this.state.startDate !== 'Invalid Date') {
             if (this.state.startDate !== null) {
                 if ( this.state.startDate === '') {
@@ -73,8 +70,6 @@ class FormatDateDrownList extends React.Component {
     }
 
     handleInputChange(e) {
-        console.log("2=", this.state.startDate);
-        // debugger
         const originalValue = e.target.value.concat(e.key);
         const inputValue = originalValue.replace(/(-|\/\/)/g, this.state.separator).slice(0, 10);
         let month, day, year;
@@ -120,12 +115,11 @@ class FormatDateDrownList extends React.Component {
             }
         }
         this.setState({
-            startDate: inputValue
+            startDate: inputValue,
         });
     }
 
     handleBadInput(originalValue) {
-        console.log("3=", this.state.startDate);
         const parts = originalValue.replace(new RegExp(`[^0-9${this.state.separator}]`), '').split(this.state.separator);
         if (dateFormat.match(/MM.DD.YYYY/) || dateFormat.match(/DD.MM.YYYY/)) {
             if (parts[0] && parts[0].length > 2) {
@@ -153,7 +147,7 @@ class FormatDateDrownList extends React.Component {
             }
         }
         this.setState({
-            startDate: parts.join(this.state.separator)
+            startDate: parts.join(this.state.separator),
         });
     }
 
@@ -166,7 +160,7 @@ class FormatDateDrownList extends React.Component {
 
             if (key === 8 || key === 46) {
                 this.setState({
-                    startDate: ''
+                    startDate: '',
                 });
             }
         }
@@ -174,38 +168,27 @@ class FormatDateDrownList extends React.Component {
 
     render() {
         let valueDate = '';
-        console.log("4=", this.state.startDate);
-        // debugger
         if (typeof  this.state.startDate !== 'undefined' && this.state.startDate !== null && this.state.startDate._d !== 'Invalid Date') {
-            // debugger
             if (this.state.startDate !== '' && this.state.startDate.length === 10) {
-                // debugger
-                console.log("41=", this.state.startDate);
                 valueDate = moment(this.state.startDate, dateFormat);
             } else {
-                // debugger
                 if (this.state.startDate !== '' && this.state.startDate._d !== null) {// &&  this.state.startDate._isUTC !== false){
                     valueDate = this.state.startDate;
                 }
             }
         }
-        // debugger
-
-        if(typeof valueDate._d !== 'undefined') {
-            debugger
-            let valueMin = valueDate.diff(minDate, 'seconds');
-            let valueMax = valueDate.diff(maxDate, 'seconds');
-            if (valueMin <=0 || valueMax >= 0 ||  isNaN(valueMin) || isNaN(valueMax)) {
-                // debugger
-                valueDate = '';
-                this.setState({
-                    startDate: valueDate,
-                });
+        if(typeof valueDate !== 'undefined') {
+            if (typeof valueDate._d !== 'undefined') {
+                let valueMin = valueDate.diff(minDate, 'seconds');
+                let valueMax = valueDate.diff(maxDate, 'seconds');
+                if (valueMin <= 0 || valueMax >= 0 || isNaN(valueMin) || isNaN(valueMax)) {
+                    valueDate = '';
+                    this.setState({
+                        startDate: valueDate,
+                    });
+                }
             }
         }
-        //
-        console.log("42=", this.state.startDate);
-        console.log("43=", valueDate);
         return (
             <div>
                 <DatePickerDropdown
